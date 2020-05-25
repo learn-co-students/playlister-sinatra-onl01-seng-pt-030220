@@ -1,3 +1,5 @@
+<h3>These are all the artists currently in your playister:</h3>
+
 <% @artists.each do |artist| %>
   <li> <a href="/artists/<%= artist.slug %>"> <%= artist.name %> </a></li>
 <% end %>

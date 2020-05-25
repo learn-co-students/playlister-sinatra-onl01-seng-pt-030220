@@ -1,4 +1,5 @@
-  
+<h3>These are all the artists currently in your playister:</h3>
+
 <% @genres.each do |genre| %>
   <li><a href="/genres/<%= genre.slug %>"> <%= genre.name %></a></li>
 <% end %>
