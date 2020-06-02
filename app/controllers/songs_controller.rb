@@ -19,9 +19,8 @@ get '/songs' do
    @song.artist=Artist.find_or_create_by(name:params["Artist Name"])
    @song.genre_ids = params[:genre]
    @song.save
-   #binding.pry
-   "Successfully created song."
-  redirect to "/songs/#{@song.slug}"
+   flash[:message] = "Successfully created song."
+   redirect to("/songs/#{@song.slug}")
  end
 
 
@@ -31,12 +30,15 @@ get '/songs' do
  end
 
  patch "/songs/:slug"  do
- #@song1=Song.find(params[params[:slug])
-  @song=Song.all.select{ |song| params[:slug] == song.slug }.first
-  @song.artist=Artist.update(name:params["Artist Name"])
-  @song.genre_ids = params[:genre]
-  #binding.pry
-  redirect "songs/#{@song.slug}"
+  @song=Song.find_by_slug(params[:slug])
+  #@song=Song.all.select{ |song| params[:slug] == song.slug }.first
+  artist=Artist.find(@song.artist_id)
+  artist.update(name:params["Artist Name"])
+  @song.artist=artist
+  @song.genre_ids = params[:genres]
+  @song.save
+  flash[:message] = "Successfully updated song."
+  redirect to("/songs/#{@song.slug}")
  end
 
 end

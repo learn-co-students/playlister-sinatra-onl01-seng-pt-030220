@@ -9,4 +9,12 @@ def  slug
   @song_name=self.name.parameterize
 end
 
+def self.find_by_slug(slug)
+   #song_name=slug.split("-").map(&:capitalize).join(" ")
+   first_word="%#{slug.capitalize.split("-")[0]}%"
+   #bb=Song.find_by(name:song_name)
+   self.where("name LIKE ?",first_word).first
+end
+
+#"blank-space"
 end

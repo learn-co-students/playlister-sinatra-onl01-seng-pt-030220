@@ -7,7 +7,6 @@ class ArtistsController < ApplicationController
 
      get "/artists/:slug"  do
       @artist=Artist.all.select{ |artist| params["slug"] == artist.slug }.first
-    # binding.pry
       erb :'artists/show'
      end
 
