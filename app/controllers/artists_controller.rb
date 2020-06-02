@@ -4,7 +4,7 @@ class ArtistsController < ApplicationController
        @artists = Artist.all
        erb :'/artists/index'
      end
-
+     
      get "/artists/:slug"  do
       @artist=Artist.all.select{ |artist| params["slug"] == artist.slug }.first
       erb :'artists/show'

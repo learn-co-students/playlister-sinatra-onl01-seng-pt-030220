@@ -32,9 +32,7 @@ get '/songs' do
  patch "/songs/:slug"  do
   @song=Song.find_by_slug(params[:slug])
   #@song=Song.all.select{ |song| params[:slug] == song.slug }.first
-  artist=Artist.find(@song.artist_id)
-  artist.update(name:params["Artist Name"])
-  @song.artist=artist
+  @song.artist.update(name:params["Artist Name"])
   @song.genre_ids = params[:genres]
   @song.save
   flash[:message] = "Successfully updated song."

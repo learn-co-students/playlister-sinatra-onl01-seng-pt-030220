@@ -14,6 +14,10 @@ def self.find_by_slug(slug)
    first_word="%#{slug.capitalize.split("-")[0]}%"
    #bb=Song.find_by(name:song_name)
    self.where("name LIKE ?",first_word).first
+  # song_name=slug.split("-").join(" ")
+   #song_name=slug.titleize
+   #Song.find_by(name: song_name)
 end
+
 
 end
