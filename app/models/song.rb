@@ -16,5 +16,4 @@ def self.find_by_slug(slug)
    self.where("name LIKE ?",first_word).first
 end
 
-#"blank-space"
 end
