@@ -1,42 +1,43 @@
 require 'spec_helper'
 
-describe "Artist" do
+describe "Song" do
   before do 
     @artist = Artist.create(:name => "Taylor Swift") 
 
-    blank_space =  Song.create(:name => "Blank Space", :artist => @artist) 
+    @song =  Song.create(:name => "Blank Space", :artist => @artist) 
 
     pop = Genre.create(:name => "Pop")
 
-    blank_space.genre_ids = pop.id
+    @song.genre_ids = pop.id
     
   end
-  it "can be initialized" do
-    expect(@artist).to be_an_instance_of(Artist)
+
+  it "can initialize a song" do
+    expect(Song.new).to be_an_instance_of(Song)
   end
 
   it "can have a name" do
-    expect(@artist.name).to eq("Taylor Swift")
+    expect(@song.name).to eq("Blank Space")
   end
 
-  it "has many songs" do
-    expect(@artist.songs.count).to eq(1)
+  it "can have many genres" do 
+    expect(SongGenre.count).to eq(1)
   end
 
-  it "can have many genres" do
-    expect(@artist.genres.count).to eq(1)
+  it "has an artist" do
+    expect(@song.artist).to eq(@artist)
   end
 
   it "can slugify its name" do
 
-    expect(@artist.slug).to eq("taylor-swift")
+    expect(@song.slug).to eq("blank-space")
   end
 
   describe "Class methods" do
-    it "given the slug can find an Artist" do
-      slug = "taylor-swift"
-      expect((Artist.find_by_slug(slug)).name).to eq("Taylor Swift")
+    it "given the slug can find a song" do
+      slug = "blank-space"
+
+      expect((Song.find_by_slug(slug)).name).to eq("Blank Space")
     end
   end
-
 end
